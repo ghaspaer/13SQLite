@@ -1,0 +1,44 @@
+Crear la tabla votantes y definir los campos dni (documento de identidad), nombre del votante, colegio donde vota y nÎáÎõÎémero de mesa donde vota.
+1 - Carga de personas.
+2 - Consulta por el dni (para saber donde vota)
+3 - Borrado de personas
+4 - ModificaciÎáÎõÎån de datos.
+
+Lo primero que haremos es crear una clase que herede de SQLiteOpenHelper. Esta clase nos permite crear la base de datos y actualizar la estructura de tablas y datos iniciales.
+Debemos implementar el constructor y sobreescribir los mÎáÎéÎİtodos onCreate y onUpgrade.
+El mÎáÎéÎİtodo onCreate se le llama cuando la base de datos se crea por primera vez. AquÎáÎõÎá es donde se define la estructura de las tablas y se cargan eventualmente los datos iniciales
+En el mÎáÎéÎİtodo onUpgrade se llama cuando la base de datos debe ser actualizada. Tiene por objetivo eliminar tablas, añadir tablas, o hacer cualquier otra cosa que necesita para actualizarse.
+En nuestro problema implementaremos una nueva clase llamada AdminSQLiteOpenHelper que herede de la clase SQLiteOpenHelper:
+
+public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
+
+	public AdminSQLiteOpenHelper(Context context, String nombre, CursorFactory factory, int version) {
+		super(context, nombre, factory, version);
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL("create table votantes(dni int primary key, nombre text, colegio text, nromesa int)");
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
+		db.execSQL("drop table if exists votantes");
+		db.execSQL("create table votantes(dni int primary key, nombre text, colegio text, nromesa int)");		
+	}	
+}
+
+En el constructor solo llamamos al constructor de la clase padre pasando los datos que llegan en los parÎáÎõÎİmetros:
+	public AdminSQLiteOpenHelper(Context context, String nombre, CursorFactory factory, int version) {
+		super(context, nombre, factory, version);
+	}
+En el mÎáÎéÎİtodo onCreate procedemos a crear la ltabla votantes con los cuatro campos respectivos y definiendo el campo dni como primary key:
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL("create table votantes(dni int primary key, nombre text, colegio text, nromesa int)");
+	}
+En el mÎáÎéÎİtodo onUpgrade procedemos a borrar la tabla votantes y crear nuevamente la tabla (en este caso con la misma estructura pero podrÎáÎõÎáa ser otra en un caso mÎáÎõÎİs real:
+	public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
+		db.execSQL("drop table if exists votantes");
+		db.execSQL("create table votantes(dni int primary key, nombre text, colegio text, nromesa int)");		
+	}
+

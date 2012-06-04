@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, SQLiteActivity!</string>
+    <string name="app_name">13SQLite</string>
+    <string name="ci">CI:</string>
+    <string name="datos">Nombre y Apellido</string>
+    <string name="inst">Institución:</string>
+    <string name="numMesa">Numero de Mesa:</string>
+    <string name="alta">Alta</string>
+    <string name="consulta">Consulta</string>
+    <string name="baja">Baja</string>
+    <string name="modificacion">Modificacion</string>
+
+</resources>
